@@ -442,13 +442,18 @@ class MeshSender:
         from other bots that happen to end in "/warnings" are ignored.
         """
         stripped = text.strip()
-        lower = stripped.lower()
-        for marker in CMD_MARKERS:
-            if lower.startswith(marker):
-                return stripped
-            colon_pos = lower.find(": " + marker)
-            if colon_pos != -1 and colon_pos <= 50:
-                return stripped[colon_pos + 2:].strip()
+        # Only the FIRST ": " separates the sender name. Searching for
+        # ": /cmd" anywhere also matched texts like "Bot: Befehle: /details ..."
+        # (another bot's /help reply) and made bots answer each other.
+        candidates = [stripped]
+        colon_pos = stripped.find(": ")
+        if 0 < colon_pos <= 50:
+            candidates.append(stripped[colon_pos + 2:].strip())
+        for cand in candidates:
+            lower = cand.lower()
+            for marker in CMD_MARKERS:
+                if lower.startswith(marker):
+                    return cand
         return None
 
     async def _on_channel_msg(self, event):

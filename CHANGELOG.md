@@ -14,6 +14,7 @@ Schon auf `main`, kommt mit der nächsten Version.
 
 **Behoben**
 - Dashboard: Die automatische Aktualisierung alle 10 Sekunden klappt aufgeklappte Warnungen nicht mehr zu. Scroll-Position und markierter Text bleiben erhalten, neu gezeichnet wird nur, wenn sich wirklich etwas geändert hat. Dasselbe gilt für das RxLog
+- Zwei WarnBridge-Bots im selben Kanal lösten sich gegenseitig aus: Die Antwort auf `/help` begann mit `/details` und wurde vom anderen Bot als Befehl beantwortet. Die Antwort beginnt jetzt mit „Befehle“, und ein Befehl zählt nur noch direkt am Anfang oder nach dem Absendernamen (erstes „: “)
 
 ## 1.4.0 – Bot-Empfang, neuer Auftritt, Updates per Skript
 

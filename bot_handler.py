@@ -223,7 +223,9 @@ class BotHandler:
     # /help – 1 Nachricht
     # ------------------------------------------------------------------
     async def _cmd_help(self, send: SendFn):
-        await send(_trunc(f"/details [n] /warnings [Ort] /swdetails /status – WarnBridge {get_version()}"))
+        # Must not start with a command: other WarnBridge bots in the same
+        # channel receive this as "Name: <text>" and would answer "/details".
+        await send(_trunc(f"Befehle /details [n] /warnings [Ort] /swdetails /status – WarnBridge {get_version()}"))
 
 
 # ------------------------------------------------------------------
